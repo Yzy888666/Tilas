@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzy.mapper.EmpExpeMapper">
+
+    <!-- 批量插入员工工作经历 -->
+    <insert id="addBatch" parameterType="java.util.List">
+        INSERT INTO emp_expr (emp_id, begin, end, company, job)
+        VALUES
+        <foreach collection="list" item="empExpr" separator=",">
+            (#{empExpr.empId}, #{empExpr.begin}, #{empExpr.end}, #{empExpr.company}, #{empExpr.job})
+        </foreach>
+    </insert>
+
+    <delete id="deleteEmpExprByEmpIds">
+        DELETE FROM emp_expr
+        WHERE emp_id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateEmpExpr">
+        <foreach collection="exprList" item="expr" separator=";">
+            UPDATE emp_expr
+            SET begin = #{expr.begin},
+            end = #{expr.end},
+            company = #{expr.company},
+            job = #{expr.job}
+            WHERE id = #{expr.id}
+        </foreach>
+    </update>
+
+
+
+
+</mapper>
