@@ -1,8 +1,8 @@
 package com.yzy.mapper;
 
 import com.yzy.pojo.Emp;
+import com.yzy.pojo.LoginInfo;
 import org.apache.ibatis.annotations.*;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,6 +11,7 @@ import java.util.Map;
 
 @Mapper
 public interface EmpMapper {
+
     List<Emp> list(String name, Integer gender, LocalDate begin, LocalDate end);
 
     @Options(useGeneratedKeys = true, keyProperty = "id")//获取生成的主键 -- mybatis中的主键返回
@@ -38,4 +39,10 @@ public interface EmpMapper {
 
     @MapKey("gender")
     List<Map<String, Object>> getEmpGenderData();
+
+    @Select("select * from emp")
+    List<Emp> findAll();
+
+    @Select("select id,name,password from emp where username=#{username} and password=#{password}")
+    LoginInfo getEmpByUsernameAndPassword(Emp emp);
 }

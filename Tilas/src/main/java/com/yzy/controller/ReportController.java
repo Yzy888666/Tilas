@@ -26,4 +26,21 @@ public class ReportController {
         log.info("查询员工性别数据");
         return Result.success(reportService.getEmpGenderData());
     }
+
+    @GetMapping("/studentDegreeData")
+    public Result getStudentDegreeDaa(){
+        log.info("查询学生学历数据");
+        return Result.success(reportService.getStudentDegreeData());
+
+    }
+
+    /**
+     * 班级人数统计
+     * @return 班级人数统计数据
+     */
+    @GetMapping("/studentCountData")
+    public Result getStudentCountData(){
+        log.info("查询班级人数统计数据");
+        return Result.success(reportService.getStudentCountData());
+    }
 }

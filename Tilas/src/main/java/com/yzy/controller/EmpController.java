@@ -58,5 +58,11 @@ public class EmpController {
         return Result.success();
     }
 
+    @GetMapping("/list")
+    public Result findAll(){
+        log.info("查询所有员工信息");
+        List<Emp> empList = empService.findAll();
+        return Result.success(empList);
+    }
 }
 

@@ -14,10 +14,12 @@ com\yzy\pojo\Dept.class
 com\yzy\service\ReportService.class
 com\yzy\mapper\DeptMapper.class
 com\yzy\pojo\PageResult.class
+com\yzy\pojo\DegreeOption.class
 com\yzy\controller\DeptController.class
 com\yzy\service\DeptService.class
 com\yzy\TilasApplication.class
 com\yzy\service\EmpService.class
+com\yzy\pojo\ClazzCountOption.class
 com\yzy\pojo\Emp.class
 com\yzy\controller\UploadController.class
 com\yzy\exception\GlobalExceptionHandler.class

@@ -4,21 +4,20 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.yzy.mapper.EmpMapper;
 import com.yzy.mapper.EmpExpeMapper;
-import com.yzy.pojo.Emp;
-import com.yzy.pojo.EmpExpr;
-import com.yzy.pojo.EmpQueryParam;
-import com.yzy.pojo.PageResult;
+import com.yzy.pojo.*;
 import com.yzy.service.EmpService;
+import com.yzy.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -109,5 +108,28 @@ public class EmpServiceImpl implements EmpService {
             empExpeMapper.addBatch(empExpr);
         }
 
+    }
+
+    @Override
+    public List<Emp> findAll() {
+        return empMapper.findAll();
+    }
+
+    @Override
+    public LoginInfo login(Emp emp) {
+        LoginInfo logininfo=empMapper.getEmpByUsernameAndPassword(emp);
+        log.info("员工登录,参数:{}", emp);
+
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("id", emp.getId());
+        claims.put("username", emp.getUsername());
+
+        if (logininfo != null){
+            String jwt = JwtUtils.generateJwt(claims);
+            logininfo.setToken(jwt);
+            return logininfo;
+        }
+        return null;
     }
 }

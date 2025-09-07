@@ -2,6 +2,7 @@ package com.yzy.service;
 
 import com.yzy.pojo.Emp;
 import com.yzy.pojo.EmpQueryParam;
+import com.yzy.pojo.LoginInfo;
 import com.yzy.pojo.PageResult;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +31,8 @@ public interface EmpService {
     Emp getInfo(Integer id);
 
     void update(Emp emp);
+
+    List<Emp> findAll();
+
+    LoginInfo login(Emp emp);
 }
